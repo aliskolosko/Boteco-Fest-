@@ -5,12 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boteco Festival İndirimi</title>
     <style>
-        /* Bu kısım sayfanın estetik görünmesini sağlayan stil kodlarıdır */
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+        /* Boteco Marka Kimliği ve Nöropazarlama Uyumlu Stiller */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap');
         
+        :root {
+            --boteco-red: #8B0000; /* Gönderdiğiniz logodaki ana koyu kırmızı (Maroon) */
+            --boteco-light-red: #A32929; /* Ana rengin bir ton açığı */
+            --text-dark: #222222;
+            --text-light: #ffffff;
+            --background-light: #fdfdfd;
+            --border-color: #e0e0e0;
+            --success-green: #27ae60;
+            --error-red: #c0392b;
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #f4f4f4; /* Hafif bir arka plan rengi */
+            background-color: var(--boteco-red); /* Ana arka plan marka rengi */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -21,121 +32,124 @@
         }
 
         .container {
-            background-color: #ffffff;
+            background-color: var(--background-light);
             border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
             padding: 30px 35px;
             width: 100%;
             max-width: 450px;
             text-align: center;
             box-sizing: border-box;
-            opacity: 0; /* Başlangıçta gizli */
-            transform: translateY(20px); /* Aşağıdan gelsin */
+            opacity: 0;
+            transform: translateY(20px);
             animation: fadeIn 0.5s ease-out forwards;
         }
         
         @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .logo {
-            max-width: 150px;
-            margin-bottom: 20px;
+            max-width: 180px; /* Logo boyutu büyütüldü */
+            margin-bottom: 25px;
         }
 
         h1 {
-            font-size: 1.8rem;
-            color: #2c3e50; /* Koyu, şık bir renk */
-            margin-bottom: 10px;
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-weight: 800; /* Daha güçlü bir başlık */
         }
 
         .offer {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #d35400; /* Boteco'ya yakışacağını düşündüğüm bir sonbahar rengi */
-            margin-bottom: 25px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--boteco-red); /* İndirim rengi ana marka rengi */
+            margin-bottom: 30px;
+            text-transform: uppercase;
         }
         
         .subtitle {
-            font-size: 1rem;
-            color: #555;
+            font-size: 1.1rem;
+            color: var(--text-dark);
             margin-bottom: 25px;
+            line-height: 1.4;
         }
 
-        /* Form Stilleri */
         form {
             display: flex;
             flex-direction: column;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             text-align: left;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 6px;
-            font-weight: 500;
-            color: #333;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
         }
 
         .form-group input[type="text"],
         .form-group input[type="tel"] {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
+            padding: 13px;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            box-sizing: border-box; /* Önemli */
+            box-sizing: border-box;
             font-size: 1rem;
+            color: var(--text-dark);
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: #d35400;
-            box-shadow: 0 0 5px rgba(211, 84, 0, 0.3);
+            border-color: var(--boteco-red);
+            box-shadow: 0 0 7px rgba(139, 0, 0, 0.3);
         }
 
-        /* KVKK Onay Kutusu */
         .consent-group {
             display: flex;
             align-items: flex-start;
             text-align: left;
-            margin-bottom: 20px;
-            font-size: 0.8rem;
-            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.85rem;
+            color: var(--text-dark);
         }
 
         .consent-group input[type="checkbox"] {
-            margin-right: 10px;
-            margin-top: 3px;
-            flex-shrink: 0; /* Küçülmemesi için */
+            margin-right: 12px;
+            margin-top: 5px;
+            flex-shrink: 0;
+            accent-color: var(--boteco-red); /* Checkbox rengi */
         }
         
         .consent-group a {
-            color: #d35400;
+            color: var(--boteco-red);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+        }
+        .consent-group a:hover {
+            text-decoration: underline;
         }
 
-        /* Buton */
         .submit-btn {
-            background-color: #d35400; /* Ana renk */
-            color: white;
+            background-color: var(--boteco-red); /* Ana buton rengi */
+            color: var(--text-light);
             border: none;
-            padding: 15px;
+            padding: 16px;
             border-radius: 8px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .submit-btn:hover {
-            background-color: #a04000;
+            background-color: var(--boteco-light-red);
         }
         
         .submit-btn:active {
@@ -149,20 +163,36 @@
 
         /* Teşekkür Ekranı */
         #success-message {
-            display: none; /* Başlangıçta gizli */
+            display: none;
             text-align: center;
         }
         
         #success-message .icon {
-            font-size: 4rem;
-            color: #27ae60; /* Başarı yeşili */
+            font-size: 4.5rem;
+            color: var(--success-green);
             animation: popIn 0.5s ease-out;
+            margin-bottom: 20px;
         }
         
         @keyframes popIn {
             0% { transform: scale(0.5); opacity: 0; }
             80% { transform: scale(1.1); opacity: 1; }
             100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Hata Mesajı Stilleri (Profesyonel Uyarı) */
+        #error-display {
+            color: var(--error-red);
+            background-color: #ffebeb;
+            border: 1px solid var(--error-red);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: -10px; /* Butonla arasını açmak için */
+            margin-bottom: 20px;
+            display: none; /* Başlangıçta gizli */
+            font-size: 0.9rem;
+            text-align: left;
+            font-weight: 500;
         }
 
     </style>
@@ -172,10 +202,11 @@
     <div class="container">
         
         <div id="form-container">
-            <img src="BOTTECO_LOGO_URL'Sİ_BURAYA" alt="Botteco Logo" class="logo">
+            
+            <img src="boteco-logo.jpg" alt="Boteco Logo" class="logo">
             
             <h1>Hoş Geldiniz!</h1>
-            <p class="subtitle">Botteco Sonbahar Festivali workshop'una katıldığınız için teşekkürler.</p>
+            <p class="subtitle">Boteco Sonbahar Festivali workshop'una katıldığınız için teşekkürler.</p>
             <p class="offer">%15 İNDİRİM KAZANIN!</p>
             <p class="subtitle" style="margin-top: -15px; font-size: 0.9rem;">İndirimi kullanmak için lütfen formu doldurun.</p>
 
@@ -195,299 +226,40 @@
                 <div class="consent-group">
                     <input type="checkbox" id="kvkk" name="kvkk" required>
                     <label for="kvkk">
-                        <a href="#" target="_blank">Aydınlatma Metni</a>'ni okudum, anladım. Kişisel verilerimin işlenmesine ve Botteco'nun özel geceleri, indirimleri hakkında tarafıma SMS/E-posta gönderilmesine izin veriyorum.
+                        <a href="https://www.botecopub.com/kvkk-aydinlatma-metni" target="_blank">Aydınlatma Metni</a>'ni okudum, anladım. Kişisel verilerimin işlenmesine ve Boteco'nun özel geceleri, indirimleri hakkında tarafıma SMS/E-posta gönderilmesine izin veriyorum.
                     </label>
                 </div>
+                
+                <div id="error-display"></div>
+                
                 <button type="submit" class="submit-btn" id="submitButton">İndirimi Al</button>
             </form>
         </div>
 
         <div id="success-message">
-             <img src="<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Botteco Festival İndirimi</title>
-    <style>
-        /* Bu kısım sayfanın estetik görünmesini sağlayan stil kodlarıdır */
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f4f4f4; /* Hafif bir arka plan rengi */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .container {
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            padding: 30px 35px;
-            width: 100%;
-            max-width: 450px;
-            text-align: center;
-            box-sizing: border-box;
-            opacity: 0; /* Başlangıçta gizli */
-            transform: translateY(20px); /* Aşağıdan gelsin */
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-        
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .logo {
-            max-width: 150px;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-size: 1.8rem;
-            color: #2c3e50; /* Koyu, şık bir renk */
-            margin-bottom: 10px;
-        }
-
-        .offer {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #d35400; /* Botteco'ya yakışacağını düşündüğüm bir sonbahar rengi */
-            margin-bottom: 25px;
-        }
-        
-        .subtitle {
-            font-size: 1rem;
-            color: #555;
-            margin-bottom: 25px;
-        }
-
-        /* Form Stilleri */
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 500;
-            color: #333;
-        }
-
-        .form-group input[type="text"],
-        .form-group input[type="tel"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box; /* Önemli */
-            font-size: 1rem;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #d35400;
-            box-shadow: 0 0 5px rgba(211, 84, 0, 0.3);
-        }
-
-        /* KVKK Onay Kutusu */
-        .consent-group {
-            display: flex;
-            align-items: flex-start;
-            text-align: left;
-            margin-bottom: 20px;
-            font-size: 0.8rem;
-            color: #666;
-        }
-
-        .consent-group input[type="checkbox"] {
-            margin-right: 10px;
-            margin-top: 3px;
-            flex-shrink: 0; /* Küçülmemesi için */
-        }
-        
-        .consent-group a {
-            color: #d35400;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        /* Buton */
-        .submit-btn {
-            background-color: #d35400; /* Ana renk */
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .submit-btn:hover {
-            background-color: #a04000;
-        }
-        
-        .submit-btn:active {
-            transform: scale(0.98);
-        }
-
-        .submit-btn:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-
-        /* Teşekkür Ekranı */
-        #success-message {
-            display: none; /* Başlangıçta gizli */
-            text-align: center;
-        }
-        
-        #success-message .icon {
-            font-size: 4rem;
-            color: #27ae60; /* Başarı yeşili */
-            animation: popIn 0.5s ease-out;
-        }
-        
-        @keyframes popIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            80% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        
-        <div id="form-container">
-            <img src="BOTTECO_LOGO_URL'Sİ_BURAYA" alt="Botteco Logo" class="logo">
-            
-            <h1>Hoş Geldiniz!</h1>
-            <p class="subtitle">Botteco Sonbahar Festivali workshop'una katıldığınız için teşekkürler.</p>
-            <p class="offer">%15 İNDİRİM KAZANIN!</p>
-            <p class="subtitle" style="margin-top: -15px; font-size: 0.9rem;">İndirimi kullanmak için lütfen formu doldurun.</p>
-
-            <form id="discountForm">
-                <div class="form-group">
-                    <label for="isim">İsim</label>
-                    <input type="text" id="isim" name="isim" required>
-                </div>
-                <div class="form-group">
-                    <label for="soyisim">Soyisim</label>
-                    <input type="text" id="soyisim" name="soyisim" required>
-                </div>
-                <div class="form-group">
-                    <label for="telefon">Telefon Numarası</label>
-                    <input type="tel" id="telefon" name="telefon" placeholder="Örn: 5321234567" pattern="[0-9]{10,11}" required>
-                </div>
-                <div class="consent-group">
-                    <input type="checkbox" id="kvkk" name="kvkk" required>
-                    <label for="kvkk">
-                        <a href="#" target="_blank">Aydınlatma Metni</a>'ni okudum, anladım. Kişisel verilerimin işlenmesine ve Botteco'nun özel geceleri, indirimleri hakkında tarafıma SMS/E-posta gönderilmesine izin veriyorum.
-                    </label>
-                </div>
-                <button type="submit" class="submit-btn" id="submitButton">İndirimi Al</button>
-            </form>
-        </div>
-
-        <div id="success-message">
-             <img src="BOTTECO_LOGO_URL'Sİ_BURAYA" alt="Botteco Logo" class="logo">
-            <div class="icon">✔</div> <h1>Teşekkür Ederiz!</h1>
+             
+            <img src="boteco-logo.jpg" alt="Boteco Logo" class="logo">
+            <div class="icon">✔</div>
+            <h1>Teşekkür Ederiz!</h1>
             <p class="offer">%15 İNDİRİMİNİZ TANIMLANDI!</p>
             <p class="subtitle" style="font-size: 1.1rem;">
-                Botteco'ya geldiğinizde isminizi veya telefon numaranızı belirtmeniz yeterlidir.
+                Boteco'ya geldiğinizde isminizi veya telefon numaranızı belirtmeniz yeterlidir.
             </p>
             <p class="subtitle">Sizi ağırlamak için sabırsızlanıyoruz!</p>
         </div>
     </div>
 
     <script>
-        // Formu ve diğer ekran elemanlarını seç
         const form = document.getElementById('discountForm');
         const submitButton = document.getElementById('submitButton');
         const formContainer = document.getElementById('form-container');
         const successMessage = document.getElementById('success-message');
+        const errorDisplay = document.getElementById('error-display'); // Hata mesajı div'i
         
         // 
-        // DEĞİŞTİRİLECEK YER 3: 
-        // Adım 2'de kopyaladığınız 'Web app URL'nizi (https://script.google.com/....) 
-        // aşağıdaki tırnakların arasına yapıştırın.
-        //
-        const SCRIPT_URL = "APPS_SCRIPT_URL'NİZ_BURAYA";
-
-        // Form gönderildiğinde çalışacak fonksiyon
-        form.addEventListener('submit', (e) => {
-            e.preventDefault(); // Formun normal gönderimini engelle
-            
-            // Butonu devre dışı bırak ve "Gönderiliyor..." yaz
-            submitButton.disabled = true;
-            submitButton.textContent = 'İşleniyor...';
-
-            // fetch API ile veriyi Google Apps Script'e gönder
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                body: new FormData(form)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.result === 'success') {
-                    // Başarılıysa: Formu gizle, teşekkür ekranını göster
-                    formContainer.style.display = 'none';
-                    successMessage.style.display = 'block';
-                } else {
-                    // Hata olursa: Kullanıcıyı bilgilendir
-                    throw new Error(data.message || 'Bilinmeyen bir hata oluştu.');
-                }
-            })
-            .catch(error => {
-                // Ağ hatası veya başka bir hata olursa
-                console.error('Hata:', error);
-                alert('Bir hata oluştu: ' + error.message + ' Lütfen tekrar deneyin.');
-                submitButton.disabled = false;
-                submitButton.textContent = 'İndirimi Al';
-            });
-        });
-    </script>
-
-</body>
-</html>" alt="Botteco Logo" class="logo">
-            <div class="icon">✔</div> <h1>Teşekkür Ederiz!</h1>
-            <p class="offer">%15 İNDİRİMİNİZ TANIMLANDI!</p>
-            <p class="subtitle" style="font-size: 1.1rem;">
-                Botteco'ya geldiğinizde isminizi veya telefon numaranızı belirtmeniz yeterlidir.
-            </p>
-            <p class="subtitle">Sizi ağırlamak için sabırsızlanıyoruz!</p>
-        </div>
-    </div>
-
-    <script>
-        // Formu ve diğer ekran elemanlarını seç
-        const form = document.getElementById('discountForm');
-        const submitButton = document.getElementById('submitButton');
-        const formContainer = document.getElementById('form-container');
-        const successMessage = document.getElementById('success-message');
-        
-        // 
-        // DEĞİŞTİRİLECEK YER 3: 
-        // Adım 2'de kopyaladığınız 'Web app URL'nizi (https://script.google.com/....) 
-        // aşağıdaki tırnakların arasına yapıştırın.
+        // ÇOK ÖNEMLİ: BURAYA Adım 2'den aldığınız Apps Script URL'nizi YAPIŞTIRIN.
+        // Bu linkin doğru ve güncel olduğundan EMİN OLUN.
+        // https://script.google.com/macros/s/.... şeklinde olmalı.
         //
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzi7wHB_a2rvzr2tT_xN62lY1xKp95hlt8xLVm5qkl9X6lha7HQqY_uC_yLkK3ADbD9NA/exec";
 
@@ -495,30 +267,49 @@
         form.addEventListener('submit', (e) => {
             e.preventDefault(); // Formun normal gönderimini engelle
             
-            // Butonu devre dışı bırak ve "Gönderiliyor..." yaz
             submitButton.disabled = true;
             submitButton.textContent = 'İşleniyor...';
+            errorDisplay.style.display = 'none'; // Eski hatayı gizle
 
             // fetch API ile veriyi Google Apps Script'e gönder
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 body: new FormData(form)
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    // Sunucudan 500, 404 gibi bir hata gelirse
+                    throw new Error('Sunucuyla bağlantı kurulamadı. Lütfen internetinizi kontrol edin.');
+                }
+                return response.json(); // Gelen yanıtı JSON olarak oku
+            })
             .then(data => {
                 if (data.result === 'success') {
                     // Başarılıysa: Formu gizle, teşekkür ekranını göster
                     formContainer.style.display = 'none';
                     successMessage.style.display = 'block';
                 } else {
-                    // Hata olursa: Kullanıcıyı bilgilendir
+                    // Apps Script'ten bir hata mesajı gelirse
                     throw new Error(data.message || 'Bilinmeyen bir hata oluştu.');
                 }
             })
             .catch(error => {
-                // Ağ hatası veya başka bir hata olursa
+                // Hata Yakalama (JSON hatası veya diğer hatalar)
                 console.error('Hata:', error);
-                alert('Bir hata oluştu: ' + error.message + ' Lütfen tekrar deneyin.');
+                
+                let errorMessage = 'Bir hata oluştu. Lütfen bilgilerinizi kontrol edip tekrar deneyin.';
+                if (error.message.includes('JSON')) {
+                    // Bu, sizin aldığınız "Unexpected token '<'" hatasıdır.
+                    // Anlamı: Apps Script URL'niz KESİNLİKLE YANLIŞ.
+                    errorMessage = 'Sistem yapılandırma hatası. Lütfen daha sonra tekrar deneyin. (Hata Kodu: JSON_PARSE)';
+                } else if (error.message.includes('Sunucu')) {
+                    errorMessage = error.message;
+                }
+                
+                // Hatayı o çirkin pop-up yerine, sayfa içindeki div'e yaz
+                errorDisplay.textContent = errorMessage;
+                errorDisplay.style.display = 'block';
+                
                 submitButton.disabled = false;
                 submitButton.textContent = 'İndirimi Al';
             });
@@ -526,5 +317,4 @@
     </script>
 
 </body>
-
 </html>
