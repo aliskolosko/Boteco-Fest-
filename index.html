@@ -236,6 +236,113 @@
             
             <img src="boteco-logo.jpg" alt="Boteco Logo" class="logo">
             
-            <h1 style="color: var(--boteco-red);"> Aramıza Hoş Geldin!</h1>
-            <p class="offer" style="color: var(--boteco-red);">%1
+            <h1 style="color: var(--boteco-red);">Hoş Geldiniz!</h1>
+            <p class="offer" style="color: var(--boteco-red);">%15 İNDİRİM KAZANIN!</p>
+            <p class="subtitle" style="margin-top: -20px; font-size: 1rem;">İndirimi kullanmak için lütfen formu doldurun.</p>
 
+            <form id="discountForm">
+                <div class="form-group">
+                    <label for="isim">İsim</label>
+                    <input type="text" id="isim" name="isim" required>
+                </div>
+                <div class="form-group">
+                    <label for="soyisim">Soyisim</label>
+                    <input type="text" id="soyisim" name="soyisim" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefon">Telefon Numarası</label>
+                    <input type="tel" id="telefon" name="telefon" placeholder="Örn: 5321234567" pattern="[0-9]{10,11}" required>
+                </div>
+                <div class="consent-group">
+                    <input type="checkbox" id="kvkk" name="kvkk" required>
+                    <label for="kvkk">
+                        <a href="https://www.botecopub.com/aydinlatma-metni" target="_blank">Aydınlatma Metni</a>'ni okudum, anladım. Kişisel verilerimin işlenmesine ve Boteco'nun özel geceleri, indirimleri hakkında tarafıma SMS/E-posta gönderilmesine izin veriyorum.
+                    </label>
+                </div>
+                
+                <div id="error-display"></div>
+                
+                <button type="submit" class="submit-btn" id="submitButton">İndirimi Al</button>
+            </form>
+        </div>
+
+        <div id="success-message">
+             
+            <img src="boteco-logo.jpg" alt="Boteco Logo" class="logo">
+            <div class="icon">✔</div>
+            <h1>Teşekkür Ederiz!</h1>
+            <p class="offer">%15 İNDİRİMİNİZ TANIMLANDI!</p>
+            <p class="subtitle" style="font-size: 1.1rem;">
+                Boteco'ya geldiğinizde isminizi veya telefon numaranızı belirtmeniz yeterlidir.
+            </p>
+            <p class="subtitle">Sizi ağırlamak için sabırsızlanıyoruz!</p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('discountForm');
+        const submitButton = document.getElementById('submitButton');
+        const formContainer = document.getElementById('form-container');
+        const successMessage = document.getElementById('success-message');
+        const errorDisplay = document.getElementById('error-display'); // Hata mesajı div'i
+        
+        // 
+        // BU SİZİN ÇALIŞAN LİNKİNİZ, OLDUĞU GİBİ KORUNDU
+        //
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzi7wHB_a2rvzr2tT_xN62lY1xKp95hlt8xLVm5qkl9X6lha7HQqY_uC_yLkK3ADbD9NA/exec";
+
+        // Form gönderildiğinde çalışacak fonksiyon (SİZİN ÇALIŞAN KODUNUZ)
+        form.addEventListener('submit', (e) => {
+            e.preventDefault(); // Formun normal gönderimini engelle
+            
+            submitButton.disabled = true;
+            submitButton.textContent = 'İşleniyor...';
+            errorDisplay.style.display = 'none'; // Eski hatayı gizle
+
+            // fetch API ile veriyi Google Apps Script'e gönder
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: new FormData(form)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    // Sunucudan 500, 404 gibi bir hata gelirse
+                    throw new Error('Sunucuyla bağlantı kurulamadı. Lütfen internetinizi kontrol edin.');
+                }
+                return response.json(); // Gelen yanıtı JSON olarak oku
+            })
+            .then(data => {
+                if (data.result === 'success') {
+                    // Başarılıysa: Formu gizle, teşekkür ekranını göster
+                    formContainer.style.display = 'none';
+                    successMessage.style.display = 'block';
+                } else {
+                    // Apps Script'ten bir hata mesajı gelirse
+                    throw new Error(data.message || 'Bilinmeyen bir hata oluştu.');
+                }
+            })
+            .catch(error => {
+                // Hata Yakalama (JSON hatası veya diğer hatalar)
+                console.error('Hata:', error);
+                
+                let errorMessage = 'Bir hata oluştu. Lütfen bilgilerinizi kontrol edip tekrar deneyin.';
+                if (error.message.includes('JSON')) {
+                    // Bu, sizin aldığınız "Unexpected token '<'" hatasıdır.
+                    // Anlamı: Apps Script URL'niz KESİNLİKLE YANLIŞ.
+                    errorMessage = 'Sistem yapılandırma hatası. Lütfen daha sonra tekrar deneyin. (Hata Kodu: JSON_PARSE)';
+                } else if (error.message.includes('Sunucu')) {
+                    errorMessage = error.message;
+                }
+                
+                // Hatayı o çirkin pop-up yerine, sayfa içindeki div'e yaz
+                errorDisplay.textContent = errorMessage;
+                errorDisplay.style.display = 'block';
+                
+                submitButton.disabled = false;
+                submitButton.textContent = 'İndirimi Al';
+            });
+        });
+    </script>
+
+</body>
+</html>
