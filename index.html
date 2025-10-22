@@ -284,64 +284,71 @@
         const submitButton = document.getElementById('submitButton');
         const formContainer = document.getElementById('form-container');
         const successMessage = document.getElementById('success-message');
-        const errorDisplay = document.getElementById('error-display'); // Hata mesajı div'i
+        const errorDisplay = document.getElementById('error-display');
         
         // 
-        // BU SİZİN ÇALIŞAN LİNKİNİZ, OLDUĞU GİBİ KORUNDU
+        // LÜTFEN DİKKAT:
+        // Buraya 2. Adımda aldığınız YENİ "v7 - JSONP Metodu" LİNKİNİ yapıştırın!
+        // ESKİ LİNKİ (...NA/exec) ARTIK KULLANMIYORUZ!
         //
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzi7wHB_a2rvzr2tT_xN62lY1xKp95hlt8xLVm5qkl9X6lha7HQqY_uC_yLkK3ADbD9NA/exec";
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxMbgV-XBbSnulPQusXaDZtEr0USTXIxpKUmafIK-XOZQeFELexRAra2AnNdz42o4SK0A/exec";
 
-        // Form gönderildiğinde çalışacak fonksiyon (SİZİN ÇALIŞAN KODUNUZ)
         form.addEventListener('submit', (e) => {
-            e.preventDefault(); // Formun normal gönderimini engelle
-            
+            e.preventDefault();
             submitButton.disabled = true;
             submitButton.textContent = 'İşleniyor...';
-            errorDisplay.style.display = 'none'; // Eski hatayı gizle
+            errorDisplay.style.display = 'none';
 
-            // fetch API ile veriyi Google Apps Script'e gönder
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                body: new FormData(form)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    // Sunucudan 500, 404 gibi bir hata gelirse
-                    throw new Error('Sunucuyla bağlantı kurulamadı. Lütfen internetinizi kontrol edin.');
+            // Verileri formdan al
+            const formData = new FormData(form);
+            
+            // Verileri URL'ye ekle (doGet metoduna uygun olarak)
+            let queryString = new URLSearchParams(formData).toString();
+            
+            // Bu, 'jsonp' metodunun kilitlenme sorununu aşmak için kullandığı bir yöntemdir
+            // Google'a "Bana 'handleResponse' adlı bir fonksiyon gönder" diyoruz.
+            let script = document.createElement('script');
+            script.src = SCRIPT_URL + "?" + queryString + "&callback=handleResponse";
+            
+            // Bu script etiketini sayfaya ekleyerek Google'a isteği gönderiyoruz.
+            document.body.appendChild(script);
+
+            // Eğer 5 saniye içinde cevap gelmezse, bir hata olduğunu varsay (zaman aşımı)
+            window.setTimeout(() => {
+                if (!successMessage.style.display || successMessage.style.display === 'none') {
+                    handleResponse({ result: "error", message: "İstek zaman aşımına uğradı. Lütfen internet bağlantınızı kontrol edin." });
                 }
-                return response.json(); // Gelen yanıtı JSON olarak oku
-            })
-            .then(data => {
-                if (data.result === 'success') {
+            }, 5000);
+        });
+
+        // Google'dan gelen yanıtı yakalayan fonksiyon (Apps Script'teki kod bunu çağıracak)
+        function handleResponse(response) {
+            try {
+                if (response.result === 'success') {
                     // Başarılıysa: Formu gizle, teşekkür ekranını göster
                     formContainer.style.display = 'none';
                     successMessage.style.display = 'block';
                 } else {
-                    // Apps Script'ten bir hata mesajı gelirse
-                    throw new Error(data.message || 'Bilinmeyen bir hata oluştu.');
+                    // Hata olursa: Kullanıcıyı bilgilendir
+                    throw new Error(response.message || 'Bilinmeyen bir hata oluştu.');
                 }
-            })
-            .catch(error => {
-                // Hata Yakalama (JSON hatası veya diğer hatalar)
+            } catch (error) {
+                // Hata Yakalama
                 console.error('Hata:', error);
+                let errorMessage = 'Bir hata oluştu: ' + error.message;
                 
-                let errorMessage = 'Bir hata oluştu. Lütfen bilgilerinizi kontrol edip tekrar deneyin.';
-                if (error.message.includes('JSON')) {
-                    // Bu, sizin aldığınız "Unexpected token '<'" hatasıdır.
-                    // Anlamı: Apps Script URL'niz KESİNLİKLE YANLIŞ.
-                    errorMessage = 'Sistem yapılandırma hatası. Lütfen daha sonra tekrar deneyin. (Hata Kodu: JSON_PARSE)';
-                } else if (error.message.includes('Sunucu')) {
-                    errorMessage = error.message;
-                }
-                
-                // Hatayı o çirkin pop-up yerine, sayfa içindeki div'e yaz
                 errorDisplay.textContent = errorMessage;
                 errorDisplay.style.display = 'block';
-                
                 submitButton.disabled = false;
                 submitButton.textContent = 'İndirimi Al';
-            });
-        });
+            }
+            
+            // Geçici script etiketini temizle
+            let tempScript = document.querySelector(`script[src*="${SCRIPT_URL}"]`);
+            if (tempScript) {
+                document.body.removeChild(tempScript);
+            }
+        }
     </script>
 
 </body>
