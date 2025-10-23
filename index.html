@@ -382,3 +382,32 @@
         // Google'dan gelen yanıtı yakalayan fonksiyon (Apps Script'teki kod bunu çağıracak)
         function handleResponse(response) {
             try {
+                if (response.result === 'success') {
+                    // Başarılıysa: Formu gizle, teşekkür ekranını göster
+                    formContainer.style.display = 'none';
+                    successMessage.style.display = 'block';
+                } else {
+                    // Hata olursa: Kullanıcıyı bilgilendir
+                    throw new Error(response.message || 'Bilinmeyen bir hata oluştu.');
+                }
+            } catch (error) {
+                // Hata Yakalama
+                console.error('Hata:', error);
+                let errorMessage = 'Bir hata oluştu: ' + error.message;
+                
+                errorDisplay.textContent = errorMessage;
+                errorDisplay.style.display = 'block';
+                submitButton.disabled = false;
+                submitButton.textContent = 'İndirimi Al';
+            }
+            
+            // Geçici script etiketini temizle
+            let tempScript = document.querySelector(`script[src*="${SCRIPT_URL}"]`);
+            if (tempScript) {
+                document.body.removeChild(tempScript);
+            }
+        }
+    </script>
+
+</body>
+</html>
