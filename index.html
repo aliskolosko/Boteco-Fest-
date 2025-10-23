@@ -226,6 +226,50 @@
             font-weight: 500;
         }
 
+        /* =======================================
+             YENİ EKLENEN INSTAGRAM BUTONU STİLİ 
+           ======================================= */
+        
+        .instagram-btn {
+            display: inline-flex; /* İkon ve metni yanyana hizalar */
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            background-color: var(--container-bg); /* Beyaz arka plan (Ters renk) */
+            color: var(--boteco-red); /* Kırmızı metin */
+            border: 2px solid var(--boteco-red); /* Kırmızı çerçeve */
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-top: 10px; /* Üstteki yazıdan ayırır */
+            transition: all 0.3s ease;
+        }
+        
+        .instagram-btn svg {
+            margin-right: 10px; /* İkon ile metin arası boşluk */
+            width: 20px;
+            height: 20px;
+            stroke: var(--boteco-red); /* İkon rengi */
+            transition: all 0.3s ease;
+        }
+        
+        .instagram-btn:hover {
+            background-color: var(--boteco-red); /* Hover olunca renkleri tersine çevir */
+            color: var(--text-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        
+        .instagram-btn:hover svg {
+            stroke: var(--text-light); /* Hover olunca ikon beyaz olur */
+        }
+        
+        /* Teşekkür ekranındaki yazıların arasını ayarlar */
+        #success-message .subtitle {
+             margin-bottom: 20px; 
+        }
+
     </style>
 </head>
 <body>
@@ -267,7 +311,7 @@
         </div>
 
         <div id="success-message">
-             
+            
             <img src="boteco-logo.jpg" alt="Boteco Logo" class="logo">
             <div class="icon">✔</div>
             <h1>Teşekkür Ederiz!</h1>
@@ -275,6 +319,19 @@
             <p class="subtitle" style="font-size: 1.1rem;">
                 Boteco'ya geldiğinde isim-soyisim veya telefon numaranı belirtmen yeterli :)
             </p>
+
+            <p class="subtitle" style="font-size: 0.9rem; margin-top: 5px; margin-bottom: 25px;">
+                Özel gecelerden haberdar olmak için bizi takip edin!
+            </p>
+
+            <a href="https://www.instagram.com/botecopubtunali/" target="_blank" class="instagram-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+                <span>Bizi Takip Edin</span>
+            </a>
             <p class="subtitle">Seni ağırlamak için sabırsızlanıyoruz! :) </p>
         </div>
     </div>
@@ -287,9 +344,7 @@
         const errorDisplay = document.getElementById('error-display');
         
         // 
-        // LÜTFEN DİKKAT:
-        // Buraya 2. Adımda aldığınız YENİ "v7 - JSONP Metodu" LİNKİNİ yapıştırın!
-        // ESKİ LİNKİ (...NA/exec) ARTIK KULLANMIYORUZ!
+        // BU SİZİN ÇALIŞAN LİNKİNİZ. BU ŞEKİLDE KORUNDU.
         //
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxMbgV-XBbSnulPQusXaDZtEr0USTXIxpKUmafIK-XOZQeFELexRAra2AnNdz42o4SK0A/exec";
 
@@ -353,5 +408,3 @@
 
 </body>
 </html>
-
-
