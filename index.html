@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boteco Festival İndirimi</title>
     <style>
-        /* * Boteco Profesyonel Marka Kimliği Stilleri v3
-         * Nöropazarlama Odaklı: Tam Marka Deneyimi (Kırmızı Arka Plan)
+        /* * Boteco Profesyonel Marka Kimliği Stilleri v5
+         * Nöropazarlama Odaklı: Tam Marka Deneyimi (Kırmızı Arka Plan + Gelişmiş Instagram CTA)
         */
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800;900&display=swap');
         
         :root {
             --boteco-red: #8B0000; /* Ana marka renginiz (Koyu Bordo/Kırmızı) */
             --boteco-red-darker: #7a0000; /* Degrade için daha koyu ton */
-            --boteco-red-hover: #A32929; /* Buton hover rengi */
+            --boteco-red-light: #A32929; /* Daha açık kırmızı ton */
             --text-dark: #2c3e50; 
             --text-light: #ffffff;
-            --container-bg: #ffffff; /* BU, KARTIN BEYAZ OLMASINI SAĞLAR */
+            --container-bg: #ffffff;
             --border-color: #dde2e7;
             --input-bg: #f9fafb;
             --success-green: #27ae60;
@@ -25,9 +25,8 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            /* Kırmızı Arka Plan */
             background-color: var(--boteco-red);
-            background-image: radial-gradient(ellipse at center, var(--boteco-red-hover) 0%, var(--boteco-red) 70%, var(--boteco-red-darker) 100%);
+            background-image: radial-gradient(ellipse at center, var(--boteco-red-light) 0%, var(--boteco-red) 70%, var(--boteco-red-darker) 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -38,9 +37,8 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Beyaz Form Kartı */
         .container {
-            background-color: var(--container-bg); /* Bu satır kartı BEYAZ yapar */
+            background-color: var(--container-bg);
             border-radius: 16px;
             box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
             padding: 35px 40px;
@@ -57,7 +55,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Yuvarlak Logo Stili */
         .logo {
             width: 150px; 
             height: 150px;
@@ -75,16 +72,15 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        /* Başlıklar (Görsel Hiyerarşi) */
         h1 {
             font-size: 1.8rem; 
-            color: var(--boteco-red); /* Kırmızı renk */
+            color: var(--boteco-red);
             margin-bottom: 10px;
             font-weight: 700;
         }
 
         .offer {
-            font-size: 2.2rem; /* TEKLİF: En baskın öğe */
+            font-size: 2.2rem;
             font-weight: 900;
             color: var(--boteco-red); 
             margin-bottom: 25px;
@@ -100,7 +96,6 @@
             font-weight: 400;
         }
 
-        /* Form Stilleri */
         .form-group {
             margin-bottom: 20px;
             text-align: left;
@@ -135,7 +130,6 @@
             box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.15);
         }
 
-        /* KVKK Checkbox */
         .consent-group {
             display: flex;
             align-items: flex-start;
@@ -163,7 +157,6 @@
             text-decoration: underline;
         }
 
-        /* Eylem Çağrısı Butonu (CTA) */
         .submit-btn {
             background-image: linear-gradient(to bottom, var(--boteco-red), var(--boteco-red-darker));
             color: var(--text-light);
@@ -181,7 +174,7 @@
         }
 
         .submit-btn:hover {
-            background-image: linear-gradient(to bottom, var(--boteco-red-hover), var(--boteco-red));
+            background-image: linear-gradient(to bottom, var(--boteco-red-light), var(--boteco-red));
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
@@ -199,7 +192,6 @@
             cursor: not-allowed;
         }
 
-        /* Teşekkür Ekranı & Hata Stilleri */
         #success-message {
             display: none;
             text-align: center;
@@ -226,48 +218,60 @@
             font-weight: 500;
         }
 
-        /* =======================================
-             YENİ EKLENEN INSTAGRAM BUTONU STİLİ 
-           ======================================= */
-        
+        /* YENİ VE GÜÇLENDİRİLMİŞ INSTAGRAM BUTONU STİLİ */
         .instagram-btn {
-            display: inline-flex; /* İkon ve metni yanyana hizalar */
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 20px;
-            background-color: var(--container-bg); /* Beyaz arka plan (Ters renk) */
-            color: var(--boteco-red); /* Kırmızı metin */
-            border: 2px solid var(--boteco-red); /* Kırmızı çerçeve */
+            /* Daha büyük buton boyutu */
+            padding: 15px 25px; 
+            width: 80%; /* Butonu biraz genişlet */
+            max-width: 300px;
+            
+            /* Kırmızı zemin, beyaz yazı (marka rengiyle uyumlu) */
+            background-image: linear-gradient(to bottom, var(--boteco-red-light), var(--boteco-red));
+            color: var(--text-light); 
+            border: none; /* Çerçeveyi kaldır */
             border-radius: 8px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 1rem;
-            margin-top: 10px; /* Üstteki yazıdan ayırır */
-            transition: all 0.3s ease;
+            font-size: 1.1rem; /* Yazı boyutunu artır */
+            margin-top: 25px; /* Üstündeki yazıdan daha fazla boşluk */
+            margin-bottom: 25px; /* Altındaki yazıdan da boşluk */
+            box-shadow: 0 6px 20px rgba(139, 0, 0, 0.3); /* Daha belirgin gölge */
+            transition: all 0.3s ease, transform 0.2s ease-out; /* Hafif animasyon */
+            letter-spacing: 0.5px;
         }
         
         .instagram-btn svg {
-            margin-right: 10px; /* İkon ile metin arası boşluk */
-            width: 20px;
-            height: 20px;
-            stroke: var(--boteco-red); /* İkon rengi */
-            transition: all 0.3s ease;
+            margin-right: 12px; /* İkon ile metin arası boşluk */
+            width: 24px; /* İkonu büyüt */
+            height: 24px;
+            stroke: var(--text-light); /* İkon beyaz olur */
+            transition: stroke 0.3s ease;
         }
         
         .instagram-btn:hover {
-            background-color: var(--boteco-red); /* Hover olunca renkleri tersine çevir */
-            color: var(--text-light);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            background-image: linear-gradient(to bottom, var(--boteco-red), var(--boteco-red-darker));
+            transform: translateY(-4px) scale(1.02); /* Hafif yukarı çıkma ve büyüme */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.35); /* Gölgeyi belirginleştir */
         }
         
-        .instagram-btn:hover svg {
-            stroke: var(--text-light); /* Hover olunca ikon beyaz olur */
+        .instagram-btn:active {
+            transform: translateY(-1px) scale(1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
         }
         
-        /* Teşekkür ekranındaki yazıların arasını ayarlar */
+        /* Teşekkür ekranındaki yazıların arasını ayarla (güncellendi) */
         #success-message .subtitle {
-             margin-bottom: 20px; 
+             margin-bottom: 15px; /* Biraz daha sıkı */
+        }
+
+        #success-message .final-message {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-top: 15px; /* Instagram butonundan sonraki mesaj */
+            font-weight: 500;
         }
 
     </style>
@@ -317,11 +321,10 @@
             <h1>Teşekkür Ederiz!</h1>
             <p class="offer">%15 İNDİRİMİN TANIMLANDI!</p>
             <p class="subtitle" style="font-size: 1.1rem;">
-                Boteco'ya geldiğinde isim-soyisim veya telefon numaranı belirtmen yeterli :)
+                Boteco'ya geldiğinde ismini veya telefon numaranı belirtmen yeterli.
             </p>
-
-            <p class="subtitle" style="font-size: 0.9rem; margin-top: 5px; margin-bottom: 25px;">
-                Özel gecelerden haberdar olmak için bizi takip edin!
+            <p class="subtitle" style="font-size: 1.1rem; font-weight: 700; color: var(--boteco-red);">
+                Fırsatları kaçırma, bizi hemen takip et!
             </p>
 
             <a href="https://www.instagram.com/botecopubtunali/" target="_blank" class="instagram-btn">
@@ -330,9 +333,9 @@
                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
-                <span>Bizi Takip Edin</span>
+                <span>BOTECO'YU TAKİP ET!</span>
             </a>
-            <p class="subtitle">Seni ağırlamak için sabırsızlanıyoruz! :) </p>
+            <p class="final-message">Seni ağırlamak için sabırsızlanıyoruz! :)</p>
         </div>
     </div>
 
@@ -379,32 +382,3 @@
         // Google'dan gelen yanıtı yakalayan fonksiyon (Apps Script'teki kod bunu çağıracak)
         function handleResponse(response) {
             try {
-                if (response.result === 'success') {
-                    // Başarılıysa: Formu gizle, teşekkür ekranını göster
-                    formContainer.style.display = 'none';
-                    successMessage.style.display = 'block';
-                } else {
-                    // Hata olursa: Kullanıcıyı bilgilendir
-                    throw new Error(response.message || 'Bilinmeyen bir hata oluştu.');
-                }
-            } catch (error) {
-                // Hata Yakalama
-                console.error('Hata:', error);
-                let errorMessage = 'Bir hata oluştu: ' + error.message;
-                
-                errorDisplay.textContent = errorMessage;
-                errorDisplay.style.display = 'block';
-                submitButton.disabled = false;
-                submitButton.textContent = 'İndirimi Al';
-            }
-            
-            // Geçici script etiketini temizle
-            let tempScript = document.querySelector(`script[src*="${SCRIPT_URL}"]`);
-            if (tempScript) {
-                document.body.removeChild(tempScript);
-            }
-        }
-    </script>
-
-</body>
-</html>
